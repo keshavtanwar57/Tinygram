@@ -1,23 +1,24 @@
 # Libraries
-
+import urllib3
+import requests
+from bs4 import BeautifulSoup
+import streamlit as st
+from sumy.summarizers.lex_rank import LexRankSummarizer
+from sumy.summarizers.text_rank import TextRankSummarizer
+from sumy.summarizers.lsa import LsaSummarizer
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.parsers.plaintext import PlaintextParser
+from gensim.summarization.summarizer import summarize
+import nltk
+nltk.download('punkt')
 # text tu\o audio
 #import pyttsx3
 
 # summarization
-from gensim.summarization.summarizer import summarize
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer
-from sumy.summarizers.lsa import LsaSummarizer
-from sumy.summarizers.text_rank import TextRankSummarizer
-from sumy.summarizers.lex_rank import LexRankSummarizer
 
 # UI
-import streamlit as st
 
 # web scaping
-from bs4 import BeautifulSoup
-import requests
-import urllib3
 
 # OCR
 # import pytesseract
