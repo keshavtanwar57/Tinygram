@@ -4,7 +4,7 @@
 #import pyttsx3
 
 # summarization
-#from gensim.summarization.summarizer import summarize
+from gensim.summarization.summarizer import summarize
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lsa import LsaSummarizer
@@ -29,6 +29,7 @@ LANGUAGE = "english"
 
 # functions
 
+
 def textFromLink(link):
 
     res = requests.get(link)
@@ -39,6 +40,7 @@ def textFromLink(link):
         a += str(i.text)
         a += ' '
     return a
+
 
 def imgFromLink(link):
     http = urllib3.PoolManager()
@@ -65,6 +67,7 @@ def LSA(txt, num):
     st.write(len(ans))
     return ans
 
+
 def textRank(txt, num):
     parser = PlaintextParser.from_string(txt, Tokenizer(LANGUAGE))
     summarizer_1 = TextRankSummarizer()
@@ -78,8 +81,9 @@ def textRank(txt, num):
     st.write(len(ans))
     return ans
 
+
 def luhnSummarizer(txt, num):
-    parser = PlaintextParser.from_string(txt,Tokenizer(LANGUAGE))
+    parser = PlaintextParser.from_string(txt, Tokenizer(LANGUAGE))
     from sumy.summarizers.luhn import LuhnSummarizer
     summarizer_1 = LuhnSummarizer()
     summary_1 = summarizer_1(parser.document, num)
@@ -92,9 +96,11 @@ def luhnSummarizer(txt, num):
     st.write(len(ans))
     return ans
 
-# def mysummarizer(txt):
-#     txt = summarize(txt)
-#     return txt
+
+def mysummarizer(txt):
+    txt = summarize(txt)
+    return txt
+
 
 def LexSummarizer(txt, num):
     parser = PlaintextParser.from_string(txt, Tokenizer(LANGUAGE))
@@ -110,11 +116,8 @@ def LexSummarizer(txt, num):
     return ans
 
 
-
-
 if __name__ == '__main__':
     #speaker = pyttsx3.init()
-
 
     st.title("Tinygram")
     link = st.text_input('Enter the link of the website : ')
@@ -123,48 +126,45 @@ if __name__ == '__main__':
 
     st.subheader("or")
 
-    txt_box = st.text_area(label='Enter Your Text', value="", height=200, max_chars=None, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder=None)
+    txt_box = st.text_area(label='Enter Your Text', value="", height=200, max_chars=None,
+                           key=None, help=None, on_change=None, args=None, kwargs=None, placeholder=None)
     txt2 = ''
     title = ''
-    #st.subheader('or')
+    # st.subheader('or')
     #img = st.file_uploader("Choose a Image")
-    number = st.number_input('Enter Number of Sentences', value = 5)
+    number = st.number_input('Enter Number of Sentences', value=5)
 
     # if img is not None:
     #     img = cv2.imread('img1.png')
     #     text = pytesseract.image_to_string(img)
     #     st.write(txt)
 
-        # result = cloudinary.uploader.upload(uploaded_image)
-        # url = result.get('url')
-        # st.write(url)
-        # reader = easyocr.Reader(['en'], gpu= False)
-        # result = reader.readtext('img1.png')
-        # st.write(result)
-
-
-
+    # result = cloudinary.uploader.upload(uploaded_image)
+    # url = result.get('url')
+    # st.write(url)
+    # reader = easyocr.Reader(['en'], gpu= False)
+    # result = reader.readtext('img1.png')
+    # st.write(result)
 
     algo = st.radio(
         "Select Algorithm: ",
-        ('Lex', 'Luhn', 'LSA', 'Text Ranking'))
+        ('Genism', 'Lex', 'Luhn', 'LSA', 'Text Ranking'))
 
     images = []
 
     if st.button('Summarize'):
         try:
-           link_txt = textFromLink(link)
-           images = imgFromLink(link)
+            link_txt = textFromLink(link)
+            images = imgFromLink(link)
         except:
             pass
         title = 'Summarized text:'
         txt = link_txt + txt_box
 
+        if algo == 'Gensim':
+            txt2 = mysummarizer(txt)
 
-        # if algo == 'Gensim':
-        #     txt2 = mysummarizer(txt)
-
-        if algo == 'Lex':
+        elif algo == 'Lex':
             txt2 = LexSummarizer(txt, number)
 
         elif algo == 'Luhn':
@@ -176,7 +176,6 @@ if __name__ == '__main__':
         elif algo == 'Text Ranking':
             txt2 = textRank(txt, number)
 
-
     st.title(title)
     st.write(txt2)
     for i in images:
@@ -186,20 +185,6 @@ if __name__ == '__main__':
             pass
 
     st.write("Made with ❤️ by Keshav Tanwar")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     # col1, col2, col3, col4, col5 = st.columns(5)
     # with col1:
