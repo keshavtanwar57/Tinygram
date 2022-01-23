@@ -98,9 +98,9 @@ def luhnSummarizer(txt, num):
     return ans
 
 
-def mysummarizer(txt):
-    txt = summarize(txt)
-    return txt
+# def mysummarizer(txt):
+#     txt = summarize(txt)
+#     return txt
 
 
 def LexSummarizer(txt, num):
@@ -149,7 +149,7 @@ if __name__ == '__main__':
 
     algo = st.radio(
         "Select Algorithm: ",
-        ('Genism', 'Lex', 'Luhn', 'LSA', 'Text Ranking'))
+        ('Lex', 'Luhn', 'LSA', 'Text Ranking'))
 
     images = []
 
@@ -162,10 +162,10 @@ if __name__ == '__main__':
         title = 'Summarized text:'
         txt = link_txt + txt_box
 
-        if algo == 'Gensim':
-            txt2 = mysummarizer(txt)
+        # if algo == 'Gensim':
+        #     txt2 = mysummarizer(txt)
 
-        elif algo == 'Lex':
+        if algo == 'Lex':
             txt2 = LexSummarizer(txt, number)
 
         elif algo == 'Luhn':
