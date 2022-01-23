@@ -4,7 +4,7 @@
 #import pyttsx3
 
 # summarization
-from gensim.summarization.summarizer import summarize
+#from gensim.summarization.summarizer import summarize
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lsa import LsaSummarizer
@@ -92,9 +92,9 @@ def luhnSummarizer(txt, num):
     st.write(len(ans))
     return ans
 
-def mysummarizer(txt):
-    txt = summarize(txt)
-    return txt
+# def mysummarizer(txt):
+#     txt = summarize(txt)
+#     return txt
 
 def LexSummarizer(txt, num):
     parser = PlaintextParser.from_string(txt, Tokenizer(LANGUAGE))
@@ -147,7 +147,7 @@ if __name__ == '__main__':
 
     algo = st.radio(
         "Select Algorithm: ",
-        ('Genism', 'Lex', 'Luhn', 'LSA', 'Text Ranking'))
+        ('Lex', 'Luhn', 'LSA', 'Text Ranking'))
 
     images = []
 
@@ -161,10 +161,10 @@ if __name__ == '__main__':
         txt = link_txt + txt_box
 
 
-        if algo == 'Gensim':
-            txt2 = mysummarizer(txt)
+        # if algo == 'Gensim':
+        #     txt2 = mysummarizer(txt)
 
-        elif algo == 'Lex':
+        if algo == 'Lex':
             txt2 = LexSummarizer(txt, number)
 
         elif algo == 'Luhn':
