@@ -8,7 +8,7 @@ from sumy.summarizers.text_rank import TextRankSummarizer
 from sumy.summarizers.lsa import LsaSummarizer
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.parsers.plaintext import PlaintextParser
-from gensim.summarization.summarizer import summarize
+#from gensim.summarization.summarizer import summarize
 import nltk
 nltk.download('punkt')
 # text tu\o audio
