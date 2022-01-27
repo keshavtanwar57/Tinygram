@@ -31,16 +31,30 @@ LANGUAGE = "english"
 # functions
 
 
-def textFromLink(link):
+def textFromYoutube(link):
+    id = link.split('watch?v=')
+    srt = YouTubeTranscriptApi.get_transcript(
+        id[1])
+    print(srt)
+    text_list = []
+    for i in srt:
+        text_list.append(i['text'])
+    text = ' '.join(text_list)
+    return text
 
-    res = requests.get(link)
-    res = BeautifulSoup(res.text, 'lxml')
-    txt = res.select('p')
-    a = ''
-    for i in txt:
-        a += str(i.text)
-        a += ' '
-    return a
+
+def textFromLink(link):
+    if 'watch?v=' in link:
+        return textFromYoutube(link)
+    else:
+        res = requests.get(link)
+        res = BeautifulSoup(res.text, 'lxml')
+        txt = res.select('p')
+        a = ''
+        for i in txt:
+            a += str(i.text)
+            a += ' '
+        return a
 
 
 def imgFromLink(link):
