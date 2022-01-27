@@ -3,19 +3,14 @@ import urllib3
 import requests
 from bs4 import BeautifulSoup
 import streamlit as st
-from sumy.summarizers.lex_rank import LexRankSummarizer
-from sumy.summarizers.text_rank import TextRankSummarizer
-from sumy.summarizers.lsa import LsaSummarizer
-from sumy.nlp.tokenizers import Tokenizer
 from sumy.parsers.plaintext import PlaintextParser
-#from gensim.summarization.summarizer import summarize
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer
+from sumy.summarizers.text_rank import TextRankSummarizer
+from sumy.summarizers.lex_rank import LexRankSummarizer
+from youtube_transcript_api import YouTubeTranscriptApi
 import nltk
 nltk.download('punkt')
-# text tu\o audio
-#import pyttsx3
-
-# summarization
-
 # UI
 
 # web scaping
@@ -110,7 +105,6 @@ def luhnSummarizer(txt, num):
     st.write(len(ans))
     return ans
 
-
 # def mysummarizer(txt):
 #     txt = summarize(txt)
 #     return txt
@@ -134,7 +128,7 @@ if __name__ == '__main__':
     #speaker = pyttsx3.init()
 
     st.title("Tinygram")
-    link = st.text_input('Enter the URL of the website or youtube video : ')
+    link = st.text_input('Enter the link of the website or youtube video : ')
     link_txt = ''
     txt = ''
 
@@ -167,6 +161,7 @@ if __name__ == '__main__':
     images = []
 
     if st.button('Summarize'):
+
         try:
             link_txt = textFromLink(link)
             images = imgFromLink(link)
@@ -199,44 +194,3 @@ if __name__ == '__main__':
             pass
 
     st.write("Made with ❤️ by Keshav Tanwar")
-
-    # col1, col2, col3, col4, col5 = st.columns(5)
-    # with col1:
-    #     if st.button('Genism'):
-    #         if len(txt) < 10:
-    #
-    #             st.write('sentence is too short')
-    #         else:
-    #             title = 'Summarized text:'
-    #             txt2 = mysummarizer(txt)
-    # with col2:
-    #     if st.button('Lex'):
-    #         if len(txt) < 10:
-    #             st.write('sentence is too short')
-    #         else:
-    #             title = 'Summarized text:'
-    #             txt2 = LexSummarizer(txt, number)
-    #
-    # with col3:
-    #     if st.button('Luhn'):
-    #         if len(txt) < 10:
-    #             st.write('sentence is too short')
-    #         else:
-    #             title = 'Summarized text:'
-    #             txt2 = luhnSummarizer(txt, number)
-    #
-    # with col4:
-    #     if st.button('LSA'):
-    #         if len(txt) < 10:
-    #             st.write('sentence is too short')
-    #         else:
-    #             title = 'Summarized text:'
-    #             txt2 = LSA(txt, number)
-    #
-    # with col5:
-    #     if st.button('Text Ranking'):
-    #         if len(txt) < 10:
-    #             st.write('sentence is too short')
-    #         else:
-    #             title = 'Summarized text:'
-    #             txt2 = textRank(txt, number)
