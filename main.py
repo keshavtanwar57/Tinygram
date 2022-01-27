@@ -35,7 +35,6 @@ def textFromYoutube(link):
     id = link.split('watch?v=')
     srt = YouTubeTranscriptApi.get_transcript(
         id[1])
-    print(srt)
     text_list = []
     for i in srt:
         text_list.append(i['text'])
@@ -135,7 +134,7 @@ if __name__ == '__main__':
     #speaker = pyttsx3.init()
 
     st.title("Tinygram")
-    link = st.text_input('Enter the link of the website : ')
+    link = st.text_input('Enter the URL of the website or youtube video : ')
     link_txt = ''
     txt = ''
 
