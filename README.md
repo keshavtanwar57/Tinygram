@@ -7,7 +7,7 @@
 - Link of article
 - Raw Text
 - Can also get the images along with the summarized text
-## How to fire it up
+## 🔥 How to fire it up
 ### Need to install the requirements first
 
 ```pip install -r requirements.txt```
